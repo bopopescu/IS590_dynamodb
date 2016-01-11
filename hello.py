@@ -1,7 +1,12 @@
 from flask import Flask
 app = Flask(__name__)
 
+app.config['DYNAMO_TABLES'] = [
+    Table('users', schema=[HashKey('username')]),
+    Table('groups', schema=[HashKey('name')]),
+]
 
+dynamo(app)
 
 @app.route("/")
 def hello():
